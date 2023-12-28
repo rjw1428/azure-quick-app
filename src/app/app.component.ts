@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, effect, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -6,7 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
-
+import { toObservable } from '@angular/core/rxjs-interop'
+import { distinctUntilChanged, scan } from 'rxjs';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -28,6 +29,10 @@ export class AppComponent {
   selectedDate = signal('');
   count = signal(0);
   error = signal(false);
+  distinctCount$ = toObservable(this.selectedDate).pipe(
+    distinctUntilChanged(),
+    scan((acc: number, cur: string) => !cur ? acc : acc + 1, 0)
+  )
 
   constructor() {
     effect(() => {

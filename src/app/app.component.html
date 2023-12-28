@@ -20,7 +20,8 @@
   <div class="content">
     <h2>Signals</h2>
     <p>The selected date is {{ selectedDate() }}</p>
-    <p>The date has been updated {{ count() }} times</p>
+    <p>The date has been submitted {{ count() }} times</p>
+    <p>The date has been updated {{ distinctCount$ | async }} times</p>
   </div>
 </main>
 
