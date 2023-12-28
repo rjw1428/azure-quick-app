@@ -27,6 +27,7 @@ export class AppComponent {
   title = 'quick-app';
   selectedDate = signal('');
   count = signal(0);
+  error = signal(false);
 
   constructor() {
     effect(() => {
@@ -35,8 +36,14 @@ export class AppComponent {
   }
 
   onClick(input: HTMLInputElement) {
-    console.log(input.value)
+    if (!input.value) {
+      console.log('error')
+      this.error.set(true)
+      return
+    }
+
+    this.error.set(false)
     this.selectedDate.set(input.value) // set value directly
-    this.count.update(v => v + 1);
+    this.count.update(v => v + 1);  // compute update based on current value
   }
 }

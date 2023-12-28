@@ -8,6 +8,9 @@
       <input matInput [matDatepicker]="picker" #date>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      @if (error()) {
+        <mat-hint style="color: red">Invalid selection</mat-hint>
+      }
     </mat-form-field>
     <div class="action-row">
       <button mat-flat-button color="primary" (click)="onClick(date)">Send</button>
