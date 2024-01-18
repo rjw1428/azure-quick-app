@@ -85,4 +85,4 @@ jobs:
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
     - name: Start App
-      run: cd ./dist/${{ env.APP_NAME}}/server && pm2 start server.mjs
+      run: cd ./dist/${{ env.APP_NAME}}/server && node server.mjs
